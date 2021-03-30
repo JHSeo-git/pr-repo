@@ -1,7 +1,9 @@
+import NewPost from '@src/components/NewPost';
+
 export type PostWriteProps = {};
 
 function PostWrite(props: PostWriteProps) {
-  return <div>PostWrite</div>;
+  return <NewPost />;
 }
 
 export default PostWrite;

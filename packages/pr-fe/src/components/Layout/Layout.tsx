@@ -27,10 +27,22 @@ const layoutStyle = css`
   height: 100%;
 `;
 const headerStyle = css`
+  position: fixed;
+  top: 0;
   height: 4rem;
-  /* border-bottom: ${palette.blueGrey[50]}; */
+  width: 100%;
+  background: linear-gradient(
+      110.7deg,
+      rgba(255, 255, 255, 0.7) 1.64%,
+      rgba(255, 255, 255, 0) 94.31%
+    ),
+    #c7f5db;
+  border-bottom: ${palette.blueGrey[50]};
 `;
-const mainStyle = css``;
+const mainStyle = css`
+  padding-top: 4rem;
+  height: 100%;
+`;
 
 Layout.Header = Header;
 Layout.Main = Main;

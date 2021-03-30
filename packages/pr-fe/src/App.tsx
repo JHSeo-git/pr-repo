@@ -5,6 +5,7 @@ import Posts from './pages/Posts';
 import PostWrite from './pages/PostWrite';
 import Layout from './components/Layout';
 import HeaderNav from './components/HeaderNav';
+import NewPostHeader from './components/NewPostHeader';
 
 function App() {
   return (
@@ -12,20 +13,27 @@ function App() {
       <Global styles={globalStyle} />
       <BrowserRouter>
         <Switch>
-          <Layout>
-            <Layout.Header>
-              <HeaderNav />
-            </Layout.Header>
-            <Layout.Main>
-              <Route exact path="/">
+          <Route exact path="/">
+            <Layout>
+              <Layout.Header>
+                <HeaderNav />
+              </Layout.Header>
+              <Layout.Main>
                 <Posts />
-              </Route>
-              <Route path="/post/write">
+              </Layout.Main>
+            </Layout>
+          </Route>
+          <Route path="/new-post">
+            <Layout>
+              <Layout.Header>
+                <NewPostHeader />
+              </Layout.Header>
+              <Layout.Main>
                 <PostWrite />
-              </Route>
-            </Layout.Main>
-            <Redirect to="/" />
-          </Layout>
+              </Layout.Main>
+            </Layout>
+          </Route>
+          <Redirect to="/" />
         </Switch>
       </BrowserRouter>
     </>

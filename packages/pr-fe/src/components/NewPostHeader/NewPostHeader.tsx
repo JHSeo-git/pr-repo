@@ -1,30 +1,29 @@
 import { css } from '@emotion/react';
 import media from '@src/lib/styles/media';
 import LogoLink from '../LogoLink';
-import HeaderNavItem from './HeaderNavItem';
+import NewPostButton from './NewPostButton';
 
-export type HeaderNavProps = {};
+export type NewPostHeaderProps = {};
 
-function HeaderNav(props: HeaderNavProps) {
+function NewPostHeader(props: NewPostHeaderProps) {
   return (
-    <nav css={navStyle}>
+    <div css={headerStyle}>
       <LogoLink />
-      <ul css={listStyle}>
-        <HeaderNavItem text="Write" to="/new-post" />
-      </ul>
-    </nav>
+      <div css={group}>
+        <NewPostButton text="저장하기" primary={true} />
+        <NewPostButton text="나가기" />
+      </div>
+    </div>
   );
 }
 
-const navStyle = css`
+const headerStyle = css`
   height: 100%;
   margin-left: auto;
   margin-right: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  // margin-left + margin-right = 400px
   width: 65rem;
   /* ${media.xxlarge} {
     width: 65rem;
@@ -37,12 +36,8 @@ const navStyle = css`
   }
 `;
 
-const listStyle = css`
-  list-style: none;
-  padding: 0;
-  margin: 0;
+const group = css`
   display: flex;
-  align-items: center;
 `;
 
-export default HeaderNav;
+export default NewPostHeader;

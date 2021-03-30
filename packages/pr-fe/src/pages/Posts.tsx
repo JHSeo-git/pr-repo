@@ -1,7 +1,9 @@
+import PostList from '@src/components/PostList';
+
 export type PostsProps = {};
 
 function Posts(props: PostsProps) {
-  return <div>post</div>;
+  return <PostList />;
 }
 
 export default Posts;

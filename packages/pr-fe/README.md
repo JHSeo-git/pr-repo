@@ -2,3 +2,5 @@
 - emotion
 - recoil
 - @toast-ui/editor
+- react-query
+- axios
