@@ -3,11 +3,16 @@ import palette from '@src/lib/styles/palette';
 
 export type NewPostButtonProps = {
   text: string;
+  onClick(): void;
   primary?: boolean;
 };
 
-function NewPostButton({ text, primary = false }: NewPostButtonProps) {
-  return <button css={buttonStyle(primary)}>{text}</button>;
+function NewPostButton({ text, onClick, primary = false }: NewPostButtonProps) {
+  return (
+    <button css={buttonStyle(primary)} onClick={onClick}>
+      {text}
+    </button>
+  );
 }
 
 const buttonStyle = (primary: boolean) => css`
@@ -21,7 +26,7 @@ const buttonStyle = (primary: boolean) => css`
   line-height: 1;
   padding: 0.5rem 0.75rem;
   border-radius: 0.25rem;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.1s ease-in-out;
   margin-left: 0.5rem;
 
   background: ${palette.teal[500]};
@@ -29,7 +34,7 @@ const buttonStyle = (primary: boolean) => css`
     background: ${palette.teal[700]};
   }
   &:active {
-    background: ${palette.teal[600]};
+    background: ${palette.teal[400]};
   }
   &:disabled {
     opacity: 0.6;
@@ -41,7 +46,7 @@ const buttonStyle = (primary: boolean) => css`
       background: ${palette.red[700]};
     }
     &:active {
-      background: ${palette.red[600]};
+      background: ${palette.red[400]};
     }
   `}
 `;

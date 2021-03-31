@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import media from '@src/lib/styles/media';
+import { responsiveWidth } from '@src/lib/styles/responsive';
 import LogoLink from '../LogoLink';
 import HeaderNavItem from './HeaderNavItem';
 
@@ -23,18 +23,8 @@ const navStyle = css`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  // margin-left + margin-right = 400px
-  width: 65rem;
-  /* ${media.xxlarge} {
-    width: 65rem;
-  } */
-  ${media.xlarge} {
-    width: 55rem;
-  }
-  ${media.large} {
-    width: 39rem;
-  }
+  padding: 0 1rem;
+  ${responsiveWidth};
 `;
 
 const listStyle = css`

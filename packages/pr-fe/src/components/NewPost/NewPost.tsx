@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
 import Editor from '../Editor';
-import TitleInput from './TitleInput';
+import NewPostTitleInput from './NewPostTitleInput';
 
 export type NewPostProps = {};
 
 function NewPost(props: NewPostProps) {
   return (
     <div css={editorWrapper}>
-      <TitleInput />
+      <NewPostTitleInput />
       <Editor />
     </div>
   );

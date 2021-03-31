@@ -31,13 +31,13 @@ const headerStyle = css`
   top: 0;
   height: 4rem;
   width: 100%;
-  background: linear-gradient(
+  /* background: linear-gradient(
       110.7deg,
       rgba(255, 255, 255, 0.7) 1.64%,
       rgba(255, 255, 255, 0) 94.31%
     ),
-    #c7f5db;
-  border-bottom: ${palette.blueGrey[50]};
+    #c7f5db; */
+  border-bottom: 0.0625rem solid ${palette.blueGrey[50]};
 `;
 const mainStyle = css`
   padding-top: 4rem;

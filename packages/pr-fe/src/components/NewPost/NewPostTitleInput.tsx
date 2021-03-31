@@ -1,12 +1,16 @@
 import { css } from '@emotion/react';
 import palette from '@src/lib/styles/palette';
 
-export type TitleInputProps = {};
+export type NewPostTitleInputProps = {
+  placeholder?: string;
+};
 
-function TitleInput(props: TitleInputProps) {
+function NewPostTitleInput({
+  placeholder = 'Please Write post title...',
+}: NewPostTitleInputProps) {
   return (
     <div css={block}>
-      <input type="text" />
+      <input type="text" placeholder={placeholder} />
     </div>
   );
 }
@@ -14,8 +18,8 @@ function TitleInput(props: TitleInputProps) {
 const block = css`
   input {
     padding-left: 2rem;
-    font-size: 2.125rem;
-    height: 4rem;
+    font-size: 2rem;
+    height: 5rem;
     width: 50%;
     background: ${palette.blueGrey[200]};
     border: none;
@@ -24,4 +28,4 @@ const block = css`
   }
 `;
 
-export default TitleInput;
+export default NewPostTitleInput;

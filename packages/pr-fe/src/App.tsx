@@ -6,10 +6,12 @@ import PostWrite from './pages/PostWrite';
 import Layout from './components/Layout';
 import HeaderNav from './components/HeaderNav';
 import NewPostHeader from './components/NewPostHeader';
+import DebugObserver from './components/DebugObserver';
 
 function App() {
   return (
     <>
+      <DebugObserver />
       <Global styles={globalStyle} />
       <BrowserRouter>
         <Switch>
