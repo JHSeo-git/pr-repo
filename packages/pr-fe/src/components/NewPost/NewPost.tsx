@@ -9,6 +9,7 @@ function NewPost(props: NewPostProps) {
     <div css={editorWrapper}>
       <NewPostTitleInput />
       <Editor />
+      <div css={restWrapper}></div>
     </div>
   );
 }
@@ -17,6 +18,10 @@ const editorWrapper = css`
   height: 100%;
   display: flex;
   flex-direction: column;
+`;
+
+const restWrapper = css`
+  height: 5rem;
 `;
 
 export default NewPost;
