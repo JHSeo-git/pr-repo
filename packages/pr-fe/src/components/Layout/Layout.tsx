@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import palette from '@src/lib/styles/palette';
+import zIndex from '@src/lib/styles/zIndex';
 
 export type LayoutProps = {
   children: React.ReactNode;
@@ -31,6 +32,8 @@ const headerStyle = css`
   top: 0;
   height: 4rem;
   width: 100%;
+  background: white;
+  ${zIndex.fixedHeader};
   /* background: linear-gradient(
       110.7deg,
       rgba(255, 255, 255, 0.7) 1.64%,

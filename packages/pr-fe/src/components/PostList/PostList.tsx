@@ -1,9 +1,9 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import usePosts from '@src/hooks/usePosts';
-import media from '@src/lib/styles/media';
 import PostItem from './PostItem';
 import PostSkelecton from './PostListSkelecton';
+import { responsiveWidth } from '@src/lib/styles/responsive';
 
 export type PostListProps = {};
 
@@ -33,17 +33,8 @@ const listStyle = css`
   margin-top: 2rem;
   margin-left: auto;
   margin-right: auto;
-  // margin-left + margin-right = 400px
-  width: 65rem;
-  /* ${media.xxlarge} {
-    width: 65rem;
-  } */
-  ${media.xlarge} {
-    width: 55rem;
-  }
-  ${media.large} {
-    width: 39rem;
-  }
+  padding: 0 1rem;
+  ${responsiveWidth};
 `;
 
 export default PostList;

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import palette from '@src/lib/styles/palette';
+import zIndex from '@src/lib/styles/zIndex';
 
 export type ModalPopupProps = {
   children: React.ReactNode;
@@ -16,7 +17,7 @@ const fullScreen = css`
   right: 0;
   bottom: 0;
   background: ${palette.grey[500]};
-  z-index: 99;
+  ${zIndex.fullScreenLoader};
 `;
 
 export default ModalPopup;
