@@ -1,13 +1,16 @@
 import { css } from '@emotion/react';
-import palette from '@src/lib/styles/palette';
 import zIndex from '@src/lib/styles/zIndex';
 
 export type ModalPopupProps = {
   children: React.ReactNode;
-};
+} & React.HTMLAttributes<HTMLDivElement>;
 
-function ModalPopup({ children }: ModalPopupProps) {
-  return <div css={fullScreen}>{children}</div>;
+function ModalPopup({ children, ...rest }: ModalPopupProps) {
+  return (
+    <div css={fullScreen} {...rest}>
+      {children}
+    </div>
+  );
 }
 
 const fullScreen = css`
@@ -16,7 +19,7 @@ const fullScreen = css`
   left: 0;
   right: 0;
   bottom: 0;
-  background: ${palette.grey[500]};
+  background: rgba(0, 0, 0, 0.4);
   ${zIndex.fullScreenLoader};
 `;
 

@@ -4,6 +4,9 @@ import { responsiveWidth } from '@src/lib/styles/responsive';
 import LogoLink from '../LogoLink';
 import NewPostButton from './NewPostButton';
 
+// const { REACT_APP_GITHUB_REPO: targetRepo,
+//   REACT_APP_GITHUB_OWNER: owner } = process.env;
+
 export type NewPostHeaderProps = {};
 
 function NewPostHeader(props: NewPostHeaderProps) {
@@ -12,8 +15,8 @@ function NewPostHeader(props: NewPostHeaderProps) {
     <div css={headerStyle}>
       <LogoLink />
       <div css={group}>
-        <NewPostButton text="Save" primary={true} onClick={onSave} />
         <NewPostButton text="Cancel" onClick={onCancel} />
+        <NewPostButton text="Push" primary={true} onClick={onSave} />
       </div>
     </div>
   );

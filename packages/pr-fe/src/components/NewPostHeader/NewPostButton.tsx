@@ -20,7 +20,6 @@ const buttonStyle = (primary: boolean) => css`
   outline: none;
   font-family: inherit;
   cursor: pointer;
-  color: white;
   font-weight: bold;
   font-size: 1rem;
   line-height: 1;
@@ -29,6 +28,7 @@ const buttonStyle = (primary: boolean) => css`
   transition: all 0.1s ease-in-out;
   margin-left: 0.5rem;
 
+  color: white;
   background: ${palette.teal[500]};
   &:hover {
     background: ${palette.teal[700]};

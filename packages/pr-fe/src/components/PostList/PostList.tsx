@@ -1,26 +1,29 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { css } from '@emotion/react';
-import usePosts from '@src/hooks/usePosts';
 import PostItem from './PostItem';
-import PostSkelecton from './PostListSkelecton';
+import PostItemSkelecton from './PostItemSkelecton';
 import { responsiveWidth } from '@src/lib/styles/responsive';
+import useGetPostsQuery from '@src/hooks/query/useGetPostsQuery';
 
 export type PostListProps = {};
 
 function PostList(props: PostListProps) {
-  const { posts, error } = usePosts();
+  const { data } = useGetPostsQuery();
 
-  if (error) {
-    console.log(error);
-  }
+  const posts = useMemo(() => {
+    if (!data) return null;
+    return data;
+  }, [data]);
+
+  console.log('rerender');
 
   return (
     <ul css={listStyle}>
-      {posts ? (
-        posts.map((post) => <PostItem key={post.id} post={post} />)
-      ) : (
-        <PostSkelecton />
-      )}
+      {posts
+        ? posts.map((post) => <PostItem key={post.id} post={post} />)
+        : Array.from({ length: 5 }).map((_, i) => (
+            <PostItemSkelecton key={i} />
+          ))}
     </ul>
   );
 }

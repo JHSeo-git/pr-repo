@@ -2,32 +2,14 @@ import React from 'react';
 import { css, keyframes } from '@emotion/react';
 import palette from '@src/lib/styles/palette';
 
-export type PostListSkelectonProps = {};
+export type PostItemSkelectonProps = {};
 
-function PostListSkelecton(props: PostListSkelectonProps) {
+function PostItemSkelecton(props: PostItemSkelectonProps) {
   return (
-    <>
-      <li css={skeleton}>
-        <div css={titleStyle}></div>
-        <div css={contentStyle}></div>
-      </li>
-      <li css={skeleton}>
-        <div css={titleStyle}></div>
-        <div css={contentStyle}></div>
-      </li>
-      <li css={skeleton}>
-        <div css={titleStyle}></div>
-        <div css={contentStyle}></div>
-      </li>
-      <li css={skeleton}>
-        <div css={titleStyle}></div>
-        <div css={contentStyle}></div>
-      </li>
-      <li css={skeleton}>
-        <div css={titleStyle}></div>
-        <div css={contentStyle}></div>
-      </li>
-    </>
+    <li css={skeleton}>
+      <div css={titleStyle}></div>
+      <div css={contentStyle}></div>
+    </li>
   );
 }
 
@@ -71,4 +53,4 @@ const contentStyle = css`
   animation: ${flash} 1s ease-in-out infinite;
 `;
 
-export default PostListSkelecton;
+export default PostItemSkelecton;

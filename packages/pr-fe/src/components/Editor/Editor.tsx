@@ -1,12 +1,16 @@
 import 'codemirror/lib/codemirror.css';
 import 'highlight.js/styles/github.css';
+import 'tui-color-picker/dist/tui-color-picker.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
 
 import { useRef } from 'react';
 import { Editor as ReactEditor } from '@toast-ui/react-editor';
 import ToastEditor from '@toast-ui/editor';
+import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import hljs from 'highlight.js';
 import { useEditorMarkdownState } from '@src/states/editorStates';
+
+// TODO: add color custom preset
 
 export type EditorProps = {};
 
@@ -36,6 +40,7 @@ function Editor(props: EditorProps) {
   return (
     <ReactEditor
       ref={editorRef}
+      usageStatistics={false}
       initialEditType="markdown"
       previewStyle="vertical"
       height="100%"
@@ -43,7 +48,7 @@ function Editor(props: EditorProps) {
       events={{
         change: onChange,
       }}
-      plugins={[syntaxHighlightPlugIn]}
+      plugins={[syntaxHighlightPlugIn, colorSyntax]}
     />
   );
 }
