@@ -1,9 +1,8 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { css } from '@emotion/react';
 import PostItem from './PostItem';
 import PostItemSkelecton from './PostItemSkelecton';
 import { responsiveWidth } from '@src/lib/styles/responsive';
-import useGetPostsQuery from '@src/hooks/query/useGetPostsQuery';
 import useGetGithubPostsQuery from '@src/hooks/query/useGetGithubPostsQuery';
 
 const {

@@ -1,13 +1,3 @@
-import format from 'date-fns/format';
-
-export function dateNowDefaultFormat() {
-  return format(Date.now(), 'yyyyMMddHH24mmss');
-}
-
-export function dateFolderFormat(date: Date) {
-  return format(date, 'yyyy-MM-dd');
-}
-
 export function convertDWArrowToNewLine(text: string) {
   return text.replace(/\u21B5/g, '\n');
 }

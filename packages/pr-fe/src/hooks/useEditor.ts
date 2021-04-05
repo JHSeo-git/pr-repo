@@ -1,4 +1,5 @@
 import { generateUrlSlug } from '@src/lib/utils/common';
+import { makeContentWithFrontmatter } from '@src/lib/utils/markdownUtil';
 import {
   useClearEditorContent,
   useEditorContentValue,
@@ -24,8 +25,18 @@ export default function useEditor() {
       return;
     }
 
-    // console.log(generateUrlSlug(content.title), content.markDown);
-    save(generateUrlSlug(content.title), content.markDown);
+    const date = new Date(Date.now());
+    // TODO: useMemo??
+    const postTitle = generateUrlSlug(content.title);
+    const postBody = makeContentWithFrontmatter({
+      title: content.title,
+      body: content.markDown,
+      date,
+      category: [],
+      user: 'JHSeo',
+    });
+
+    save(postTitle, postBody, date);
   };
 
   const onCancel = () => {

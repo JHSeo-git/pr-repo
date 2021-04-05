@@ -1,5 +1,8 @@
 import * as githubApi from '@src/lib/github-api';
-import { dateFolderFormat, dateNowDefaultFormat } from '@src/lib/utils/common';
+import {
+  dateFolderFormat,
+  dateNowDefaultFormat,
+} from '@src/lib/utils/dateUtil';
 import { useState } from 'react';
 import useAppToast from './useAppToast';
 
@@ -21,13 +24,12 @@ export default function useSavePost() {
   // 5. update new-branch ref <- commit
   // 6. merge to master <- new-branch
   // 7. remove new-branch ref
-  const save = async (slug: string, body: string) => {
+  const save = async (slug: string, body: string, saveDate: Date) => {
     if (!repo || !owner || !master) {
       notify('Github Config is not defined', 'error');
       return;
     }
     const newBranchName = `${slug}_${dateNowDefaultFormat()}`;
-    const saveDate = new Date(Date.now());
 
     try {
       setLoading(true);
