@@ -32,3 +32,49 @@ type GitTreeType = {
 export type CreateTreePayload = {
   tree: GitTreeType[];
 } & GitPayload;
+
+export type CreateCommitPayload = {
+  message: string;
+  treeSha: string;
+} & GitPayload;
+
+export type UpdateBranchPayload = {
+  ref: string;
+  sha: string;
+  force?: boolean;
+} & GitPayload;
+
+export type MergeToMasterPayload = {
+  head: string;
+  base?: string;
+} & GitPayload;
+
+export type RemoveBranchPayload = {
+  ref: string;
+} & GitPayload;
+
+export type GetMasterBranchPayload = {
+  ref?: string;
+} & GitPayload;
+
+export type CreateIssuePayload = {
+  title: string;
+  body?: string;
+  labels?: (
+    | string
+    | {
+        id?: number | undefined;
+        name?: string | undefined;
+        description?: string | null | undefined;
+        color?: string | null | undefined;
+      }
+  )[];
+} & GitPayload;
+
+export type GetPostsPaylod = {
+  path?: string;
+} & GitPayload;
+
+export type GetPostsByRecursivePayload = {
+  ref?: string;
+} & GitPayload;

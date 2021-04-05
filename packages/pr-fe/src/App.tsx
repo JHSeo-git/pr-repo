@@ -5,8 +5,9 @@ import Posts from './pages/Posts';
 import PostWrite from './pages/PostWrite';
 import Layout from './components/Layout';
 import HeaderNav from './components/HeaderNav';
-import NewPostHeader from './components/NewPostHeader';
+import NewPostHeader from './components/WritePostHeader';
 import DebugObserver from './components/DebugObserver';
+import AppToast from './components/AppToast';
 
 function App() {
   return (
@@ -15,26 +16,25 @@ function App() {
       <Global styles={globalStyle} />
       <BrowserRouter>
         <Switch>
-          <Route exact path="/">
-            <Layout>
+          <Layout>
+            <AppToast />
+            <Route exact path="/">
               <Layout.Header>
                 <HeaderNav />
               </Layout.Header>
               <Layout.Main>
                 <Posts />
               </Layout.Main>
-            </Layout>
-          </Route>
-          <Route path="/new-post">
-            <Layout>
+            </Route>
+            <Route path="/new-post">
               <Layout.Header>
                 <NewPostHeader />
               </Layout.Header>
               <Layout.Main>
                 <PostWrite />
               </Layout.Main>
-            </Layout>
-          </Route>
+            </Route>
+          </Layout>
           <Redirect to="/" />
         </Switch>
       </BrowserRouter>

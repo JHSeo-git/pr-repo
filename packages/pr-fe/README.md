@@ -11,6 +11,7 @@
 - repository: https://docs.github.com/en/rest/reference/repos
 - branch: https://docs.github.com/en/rest/reference/git#refs
 
+0. get master branch for sha
 1. create new-branch ref
 2. create blob
 3. create tree <- blob

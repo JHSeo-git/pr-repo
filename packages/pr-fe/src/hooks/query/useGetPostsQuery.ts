@@ -8,6 +8,6 @@ export default function useGetPostsQuery(
   return useQuery(createKey(), () => getPosts(), options);
 }
 
-const createKey = () => ['posts'];
+const createKey = () => ['test-posts'];
 
 useGetPostsQuery.createKey = createKey;

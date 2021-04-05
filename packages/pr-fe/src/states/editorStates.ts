@@ -1,4 +1,10 @@
-import { atom, selector, useRecoilState, useRecoilValue } from 'recoil';
+import {
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+  useResetRecoilState,
+} from 'recoil';
 
 export const editorMarkdown = atom<string | null>({
   key: 'editorMarkdown',
@@ -41,12 +47,12 @@ export function useEditorTitleState() {
 }
 
 export function useClearEditorContent() {
-  const [, setEditorMarkdown] = useEditorMarkdownState();
-  const [, setEditorTitle] = useEditorTitleState();
+  const resetTitle = useResetRecoilState(editorTitle);
+  const resetMarkdown = useResetRecoilState(editorMarkdown);
 
   const clearEditorContent = () => {
-    setEditorMarkdown(null);
-    setEditorTitle(null);
+    resetTitle();
+    resetMarkdown();
   };
 
   return {

@@ -12,7 +12,7 @@ export default async function createBranchRef({
     {
       owner,
       repo,
-      ref,
+      ref: `refs/heads/${ref}`,
       sha,
     }
   );

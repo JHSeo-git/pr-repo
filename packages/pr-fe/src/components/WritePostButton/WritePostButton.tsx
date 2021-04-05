@@ -1,16 +1,22 @@
 import { css } from '@emotion/react';
 import palette from '@src/lib/styles/palette';
 
-export type NewPostButtonProps = {
+export type WritePostButtonProps = {
   text: string;
   onClick(): void;
   primary?: boolean;
+  loading?: boolean;
 };
 
-function NewPostButton({ text, onClick, primary = false }: NewPostButtonProps) {
+function WritePostButton({
+  text,
+  onClick,
+  primary = false,
+  loading = false,
+}: WritePostButtonProps) {
   return (
-    <button css={buttonStyle(primary)} onClick={onClick}>
-      {text}
+    <button css={buttonStyle(primary)} onClick={onClick} disabled={loading}>
+      {loading ? 'loading...' : text}
     </button>
   );
 }
@@ -23,10 +29,10 @@ const buttonStyle = (primary: boolean) => css`
   font-weight: bold;
   font-size: 1rem;
   line-height: 1;
+  height: 2.25rem;
   padding: 0.5rem 0.75rem;
   border-radius: 0.25rem;
   transition: all 0.1s ease-in-out;
-  margin-left: 0.5rem;
 
   color: white;
   background: ${palette.teal[500]};
@@ -38,6 +44,7 @@ const buttonStyle = (primary: boolean) => css`
   }
   &:disabled {
     opacity: 0.6;
+    cursor: not-allowed;
   }
   ${primary &&
   css`
@@ -51,4 +58,4 @@ const buttonStyle = (primary: boolean) => css`
   `}
 `;
 
-export default NewPostButton;
+export default WritePostButton;

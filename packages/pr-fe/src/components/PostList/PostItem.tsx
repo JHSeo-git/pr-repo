@@ -1,16 +1,16 @@
 import { css } from '@emotion/react';
-import { Post } from '@src/lib/api/posts/types';
 import palette from '@src/lib/styles/palette';
 
 export type PostItemProps = {
-  post: Post;
+  title: string;
+  body?: string;
 };
 
-function PostItem({ post }: PostItemProps) {
+function PostItem({ title, body }: PostItemProps) {
   return (
     <li css={itemStyle}>
-      <h2>{post.title}</h2>
-      <p>{post.body}</p>
+      <h2>{title}</h2>
+      <p>{body}</p>
     </li>
   );
 }
