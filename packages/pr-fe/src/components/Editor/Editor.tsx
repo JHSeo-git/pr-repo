@@ -1,14 +1,14 @@
 import 'codemirror/lib/codemirror.css';
-import 'highlight.js/styles/github.css';
+import 'highlight.js/styles/atom-one-light.css';
 import 'tui-color-picker/dist/tui-color-picker.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
 
 import { useRef } from 'react';
 import { Editor as ReactEditor } from '@toast-ui/react-editor';
-import ToastEditor from '@toast-ui/editor';
+
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
-import hljs from 'highlight.js';
 import { useEditorMarkdownState } from '@src/states/editorStates';
+import { syntaxHighlightEditorPlugIn } from '@src/lib/utils/tuiPlugins';
 
 // TODO: add color custom preset
 
@@ -23,20 +23,6 @@ function Editor(props: EditorProps) {
     setEditorMarkdown(editorRef.current.getInstance().getMarkdown());
   };
 
-  const syntaxHighlightPlugIn = () => {
-    const languages = hljs.listLanguages();
-    languages.forEach((type) => {
-      const convertor = (codeText: string) =>
-        hljs.highlight(codeText, { language: type }).value;
-      const aliases = hljs.getLanguage(type)?.aliases || [];
-      const langTypes = [type, ...aliases];
-
-      langTypes.forEach((lang) => {
-        ToastEditor.codeBlockManager.setReplacer(lang, convertor);
-      });
-    });
-  };
-
   return (
     <ReactEditor
       ref={editorRef}
@@ -48,7 +34,7 @@ function Editor(props: EditorProps) {
       events={{
         change: onChange,
       }}
-      plugins={[syntaxHighlightPlugIn, colorSyntax]}
+      plugins={[syntaxHighlightEditorPlugIn, colorSyntax]}
     />
   );
 }
