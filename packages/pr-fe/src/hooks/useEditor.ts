@@ -27,10 +27,12 @@ export default function useEditor() {
 
     const date = new Date(Date.now());
     // TODO: useMemo??
+    // TODO: short_description, category
     const postTitle = generateUrlSlug(content.title);
     const postBody = makeContentWithFrontmatter({
       title: content.title,
       body: content.markDown,
+      short_description: 'short',
       date,
       category: [],
       user: 'JHSeo',

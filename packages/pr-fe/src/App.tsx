@@ -2,12 +2,12 @@ import React from 'react';
 import { css, Global } from '@emotion/react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import Posts from './pages/Posts';
-import PostWrite from './pages/PostWrite';
+import Write from './pages/Write';
 import Layout from './components/Layout';
 import HeaderNav from './components/HeaderNav';
-import NewPostHeader from './components/WritePostHeader';
 import DebugObserver from './components/DebugObserver';
 import AppToast from './components/AppToast';
+import Post from './pages/Post';
 
 function App() {
   return (
@@ -18,21 +18,21 @@ function App() {
         <Switch>
           <Layout>
             <AppToast />
-            <Route exact path="/">
+            <Route exact path={['/', '/post/:path']}>
               <Layout.Header>
                 <HeaderNav />
               </Layout.Header>
               <Layout.Main>
-                <Posts />
+                <Route exact path="/">
+                  <Posts />
+                </Route>
+                <Route exact path="/post/:path">
+                  <Post />
+                </Route>
               </Layout.Main>
             </Route>
             <Route path="/new-post">
-              <Layout.Header>
-                <NewPostHeader />
-              </Layout.Header>
-              <Layout.Main>
-                <PostWrite />
-              </Layout.Main>
+              <Write />
             </Route>
           </Layout>
           <Redirect to="/" />

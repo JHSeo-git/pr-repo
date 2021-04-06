@@ -326,6 +326,21 @@ export const lightIcons = {
   inactive: 'rgba(255,25,,255,0.5)',
 };
 
+export const colorArray = [
+  red,
+  orange,
+  yellow,
+  green,
+  blue,
+  indigo,
+  purple,
+  brown,
+  blueGrey,
+  lightGreen,
+  deepPurple,
+  pink,
+];
+
 export default {
   red: red,
   pink: pink,
@@ -352,4 +367,5 @@ export default {
   lightText: lightText,
   darkIcons: darkIcons,
   lightIcons: lightIcons,
+  colorArray: colorArray,
 } as const;

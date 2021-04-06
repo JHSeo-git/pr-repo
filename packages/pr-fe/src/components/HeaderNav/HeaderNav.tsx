@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import media from '@src/lib/styles/media';
 import { responsiveWidth } from '@src/lib/styles/responsive';
 import LogoLink from '../LogoLink';
 import HeaderNavItem from './HeaderNavItem';
@@ -18,13 +19,14 @@ function HeaderNav(props: HeaderNavProps) {
 
 const navStyle = css`
   height: 100%;
-  margin-left: auto;
-  margin-right: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1rem;
+  padding: 0;
   ${responsiveWidth};
+  ${media.custom(650)} {
+    padding: 0 1rem;
+  }
 `;
 
 const listStyle = css`

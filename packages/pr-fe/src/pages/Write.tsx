@@ -2,8 +2,8 @@ import WritePost from '@src/components/WritePost';
 
 export type PostWriteProps = {};
 
-function PostWrite(props: PostWriteProps) {
+function Write(props: PostWriteProps) {
   return <WritePost />;
 }
 
-export default PostWrite;
+export default Write;

@@ -9,6 +9,8 @@ export const responsiveWidth = css`
   /* ${media.xlarge} {
     width: 55rem;
   } */
+  margin-left: auto;
+  margin-right: auto;
   width: 55rem;
   ${media.large} {
     width: 39rem;

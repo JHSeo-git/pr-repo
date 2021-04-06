@@ -1,25 +1,41 @@
-import * as matter from 'gray-matter';
-import { dateFolderFormat } from './dateUtil';
-
-type MakeFrontmatterProps = {
-  title: string;
-  body: string;
-  date: Date;
-  user?: string;
-  category?: string[];
-};
+import matter from 'gray-matter';
+import { decode } from 'js-base64';
+import { FrontMatterType, PostWithFrontmatterType } from '../types/post';
+import { dateFullFormat } from './dateUtil';
 
 export const makeContentWithFrontmatter = ({
   title,
+  short_description,
   body,
   date,
   user,
   category,
-}: MakeFrontmatterProps) => {
+}: PostWithFrontmatterType) => {
   return matter.stringify(body, {
     title,
-    date: dateFolderFormat(date),
+    short_description,
+    date: dateFullFormat(date),
     user: user ?? '',
     category: category?.join(','),
   });
+};
+
+export const parseFrontmatterOfContent = (markdown: string) => {
+  const { data, content } = matter(decodeBase64(markdown));
+
+  const frontmatter: FrontMatterType = {
+    title: data['title'],
+    short_description: data['short_description'] ?? null,
+    date: new Date(data['date']) ?? null,
+    user: data['user'],
+    category: data['category'] ? data['category'].split(',') : null,
+  };
+  return {
+    frontmatter,
+    content,
+  };
+};
+
+export const decodeBase64 = (content: string) => {
+  return decode(content);
 };

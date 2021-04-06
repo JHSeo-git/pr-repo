@@ -1,6 +1,6 @@
-export function convertDWArrowToNewLine(text: string) {
+export const convertDWArrowToNewLine = (text: string) => {
   return text.replace(/\u21B5/g, '\n');
-}
+};
 
 export const generateUrlSlug = (text: string) => {
   // 한글 unicode: /[\u3131-\u314e|\u314f-\u3163|\uac00-\ud7a3]/g
@@ -11,3 +11,9 @@ export const generateUrlSlug = (text: string) => {
     .replace(/ /g, '-')
     .replace(/--+/g, '-');
 };
+
+const convertChar = '^';
+export const encodeParamSlash = (path: string) =>
+  path.replaceAll('/', convertChar);
+export const decodeParamSlash = (decoded: string) =>
+  decoded.replaceAll(convertChar, '/');

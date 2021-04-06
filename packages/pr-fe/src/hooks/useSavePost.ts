@@ -3,16 +3,12 @@ import {
   dateFolderFormat,
   dateNowDefaultFormat,
 } from '@src/lib/utils/dateUtil';
+import { useGithubAPIValue } from '@src/states/githubAPIstates';
 import { useState } from 'react';
 import useAppToast from './useAppToast';
 
-const {
-  REACT_APP_GITHUB_REPO: repo,
-  REACT_APP_GITHUB_OWNER: owner,
-  REACT_APP_GITHUB_MASTER: master,
-} = process.env;
-
 export default function useSavePost() {
+  const { owner, repo, master } = useGithubAPIValue();
   const [loading, setLoading] = useState(false);
   const { notify } = useAppToast();
 
@@ -29,7 +25,7 @@ export default function useSavePost() {
       notify('Github Config is not defined', 'error');
       return;
     }
-    const newBranchName = `${slug}_${dateNowDefaultFormat()}`;
+    const newBranchName = `${dateNowDefaultFormat()}_${slug}`;
 
     try {
       setLoading(true);

@@ -4,19 +4,21 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { RecoilRoot } from 'recoil';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import initializeState from './states/recoilInitialize';
 
 // Create a client
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
+      retry: false,
     },
   },
 });
 
 ReactDOM.render(
   <React.StrictMode>
-    <RecoilRoot>
+    <RecoilRoot initializeState={initializeState}>
       <QueryClientProvider client={queryClient}>
         <App />
       </QueryClientProvider>
