@@ -3,11 +3,22 @@ import { GetPostsByRecursivePayload } from '@src/lib/github-api/types';
 import { QueryOptionsOf } from '@src/lib/utils/types';
 import { useQuery } from 'react-query';
 
+type QueryProps = {} & GetPostsByRecursivePayload;
+
 export default function useGetGithubPostsQuery(
-  props: GetPostsByRecursivePayload,
+  { owner, repo, ref }: QueryProps,
   options: QueryOptionsOf<typeof getPostsByRecursive> = {}
 ) {
-  return useQuery(createKey(), () => getPostsByRecursive(props), options);
+  return useQuery(
+    createKey(),
+    () =>
+      getPostsByRecursive({
+        owner,
+        repo,
+        ref,
+      }),
+    options
+  );
 }
 
 const createKey = () => ['posts'];

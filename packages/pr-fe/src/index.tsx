@@ -4,6 +4,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { RecoilRoot } from 'recoil';
 import { QueryClient, QueryClientProvider } from 'react-query';
+// import { ReactQueryDevtools } from 'react-query/devtools';
 import initializeState from './states/recoilInitialize';
 
 // Create a client
@@ -21,6 +22,7 @@ ReactDOM.render(
     <RecoilRoot initializeState={initializeState}>
       <QueryClientProvider client={queryClient}>
         <App />
+        {/* <ReactQueryDevtools initialIsOpen={true} /> */}
       </QueryClientProvider>
     </RecoilRoot>
   </React.StrictMode>,

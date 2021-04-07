@@ -19,16 +19,18 @@ function PostList(props: PostListProps) {
   const { owner, repo } = useGithubAPIValue();
   const { data: githubData } = useGetGithubPostsQuery(
     {
-      owner: owner ?? '',
-      repo: repo ?? '',
+      owner: owner!,
+      repo: repo!,
     },
     {
+      enabled: owner !== undefined && repo !== undefined,
       refetchOnWindowFocus: true,
     }
   );
 
   const posts = useMemo<PostsType | null>(() => {
     if (!githubData) return null;
+
     return githubData
       .map((item) => ({
         path: item.path,

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { css } from '@emotion/react';
 import useGetGithubPostQuery from '@src/hooks/query/useGetGithubPostQuery';
 import palette from '@src/lib/styles/palette';
@@ -7,6 +7,7 @@ import { useGithubAPIValue } from '@src/states/githubAPIstates';
 import { useHistory } from 'react-router';
 import { useSetViewerState } from '@src/states/viewerStates';
 import { encodeParamSlash } from '@src/lib/utils/common';
+import PostItemSkelecton from './PostItemSkelecton';
 
 export type PostItemProps = {
   index: number;
@@ -14,14 +15,21 @@ export type PostItemProps = {
 };
 
 function PostItem({ index, path }: PostItemProps) {
+  const ref = useRef<HTMLLIElement>(null);
+  const [isView, setIsView] = useState(false);
   const { owner, repo } = useGithubAPIValue();
   const history = useHistory();
   const set = useSetViewerState();
-  const { data } = useGetGithubPostQuery({
-    owner: owner ?? '',
-    repo: repo ?? '',
-    path,
-  });
+  const { data } = useGetGithubPostQuery(
+    {
+      owner: owner!,
+      repo: repo!,
+      path,
+    },
+    {
+      enabled: owner !== undefined && repo !== undefined && isView,
+    }
+  );
 
   const postContent = useMemo(() => {
     if (!data) return null;
@@ -37,9 +45,11 @@ function PostItem({ index, path }: PostItemProps) {
     };
   }, [data]);
 
-  if (!postContent) return null;
+  // if (!postContent) return null;
 
   const onClick = () => {
+    if (!postContent) return;
+
     set({
       title: postContent.title,
       date: postContent.date,
@@ -51,11 +61,38 @@ function PostItem({ index, path }: PostItemProps) {
     history.push(`/post/${encodeParamSlash(postContent.path)}`);
   };
 
+  const observer = useMemo(
+    () =>
+      new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsView(true);
+          }
+        });
+      }),
+    [setIsView]
+  );
+
+  useEffect(() => {
+    if (!ref?.current) return;
+    const el = ref.current;
+    observer.observe(el);
+    return () => {
+      observer.unobserve(el);
+    };
+  }, [observer]);
+
   return (
-    <li css={itemStyle} onClick={onClick}>
-      <div css={pointBorder(index)} />
-      <h2>{postContent.title}</h2>
-      <h2>{postContent.short_description}</h2>
+    <li ref={ref} css={listStyle}>
+      {postContent ? (
+        <div css={itemStyle} onClick={onClick}>
+          <div css={pointBorder(index)} />
+          <h2>{postContent.title}</h2>
+          <p>{postContent.short_description}</p>
+        </div>
+      ) : (
+        <PostItemSkelecton />
+      )}
     </li>
   );
 }
@@ -68,8 +105,13 @@ const pointBorder = (index: number = 1) => css`
   background: ${palette.colorArray[index % palette.colorArray.length][200]};
 `;
 
+const listStyle = css`
+  & + & {
+    margin-top: 1.5rem;
+  }
+`;
 const itemStyle = css`
-  min-height: 10rem;
+  min-height: 8rem;
   border-radius: 0.1875rem;
   cursor: pointer;
   box-shadow: 0 0 0.0625rem rgba(0, 0, 0, 0.11),
@@ -84,22 +126,19 @@ const itemStyle = css`
       0 0.25rem 0.3125rem rgba(0, 0, 0, 0.11);
   }
 
-  & + & {
-    margin-top: 1.5rem;
-  }
-
   h2 {
     margin: 0;
     padding: 0 1rem;
-    font-size: 2rem;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
     line-height: 1.5;
     color: ${palette.blueGrey[900]};
   }
   p {
     margin: 0;
     padding: 0 1rem;
-    margin-top: 1rem;
-    font-size: 0.85rem;
+    font-size: 1rem;
+    font-weight: 500;
     color: ${palette.blueGrey[700]};
   }
 `;

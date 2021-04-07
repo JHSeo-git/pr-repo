@@ -9,6 +9,7 @@ import { Editor as ReactEditor } from '@toast-ui/react-editor';
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import { useEditorMarkdownState } from '@src/states/editorStates';
 import { syntaxHighlightEditorPlugIn } from '@src/lib/utils/tuiPlugins';
+import TUIWrapper from '../TUIWrapper';
 
 // TODO: add color custom preset
 
@@ -24,18 +25,20 @@ function Editor(props: EditorProps) {
   };
 
   return (
-    <ReactEditor
-      ref={editorRef}
-      usageStatistics={false}
-      initialEditType="markdown"
-      previewStyle="vertical"
-      height="100%"
-      hideModeSwitch={true}
-      events={{
-        change: onChange,
-      }}
-      plugins={[syntaxHighlightEditorPlugIn, colorSyntax]}
-    />
+    <TUIWrapper>
+      <ReactEditor
+        ref={editorRef}
+        usageStatistics={false}
+        initialEditType="markdown"
+        previewStyle="vertical"
+        height="100%"
+        hideModeSwitch={true}
+        events={{
+          change: onChange,
+        }}
+        plugins={[syntaxHighlightEditorPlugIn, colorSyntax]}
+      />
+    </TUIWrapper>
   );
 }
 

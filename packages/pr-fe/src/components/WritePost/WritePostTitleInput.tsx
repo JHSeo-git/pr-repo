@@ -42,7 +42,7 @@ const inputStyle = css`
   resize: none;
   color: ${palette.blueGrey[900]};
   &::placeholder {
-    color: ${palette.blueGrey[200]};
+    color: ${palette.grey[400]};
   }
 `;
 

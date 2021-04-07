@@ -5,12 +5,15 @@ import {
 } from '@src/lib/utils/dateUtil';
 import { useGithubAPIValue } from '@src/states/githubAPIstates';
 import { useState } from 'react';
+import { useHistory } from 'react-router';
 import useAppToast from './useAppToast';
 
 export default function useSavePost() {
   const { owner, repo, master } = useGithubAPIValue();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const { notify } = useAppToast();
+  const history = useHistory();
 
   // 0. get master branch for sha
   // 1. create new-branch ref
@@ -29,6 +32,7 @@ export default function useSavePost() {
 
     try {
       setLoading(true);
+      setError(null);
 
       const masterBranch = await githubApi.getMasterBranch({
         owner,
@@ -71,12 +75,14 @@ export default function useSavePost() {
         sha: newCommit.sha,
         force: true,
       });
-      await githubApi.mergeToMaster({
+      const mergeResult = await githubApi.mergeToMaster({
         owner,
         repo,
         head: newBranchName,
         base: 'master',
       });
+
+      console.log('merge Result', mergeResult);
     } catch (e) {
       const issueTitle = `Save Post Error ${newBranchName}`;
       const issueBody = `
@@ -85,6 +91,9 @@ export default function useSavePost() {
         Content: ${e}
         Date: ${saveDate.toLocaleString()}
       `;
+
+      setError(issueTitle);
+
       await githubApi.createIssue({
         owner,
         repo,
@@ -99,11 +108,15 @@ export default function useSavePost() {
         ref: newBranchName,
       });
       setLoading(false);
+      if (!error) {
+        history.replace('/');
+      }
     }
   };
 
   return {
     save,
     loading,
+    error,
   };
 }

@@ -49,6 +49,7 @@ function ReadPost(props: ReadPostProps) {
       <h1 className="title">{postContent.title}</h1>
       <p className="date">{postContent.date.toLocaleString()}</p>
       <Viewer markdown={postContent.body} />
+      <footer css={footer}>footer</footer>
     </div>
   );
 }
@@ -74,6 +75,11 @@ const viewerWrapper = css`
     text-align: right;
     margin-bottom: 3rem;
   }
+`;
+
+const footer = css`
+  justify-self: flex-end;
+  height: 5rem;
 `;
 
 export default ReadPost;

@@ -3,8 +3,10 @@ import { GetPostPayload } from '@src/lib/github-api/types';
 import { QueryOptionsOf } from '@src/lib/utils/types';
 import { useQuery } from 'react-query';
 
+type QueryProps = GetPostPayload;
+
 export default function useGetGithubPostQuery(
-  { owner, repo, path }: GetPostPayload,
+  { owner, repo, path }: QueryProps,
   options: QueryOptionsOf<typeof getPost> = {}
 ) {
   return useQuery(

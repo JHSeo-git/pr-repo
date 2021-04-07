@@ -19,3 +19,7 @@
 5. update new-branch ref <- commit
 6. merge to master <- new-branch
 7. remove new-branch ref
+
+## else...
+
+- By default, "inactive" queries are garbage collected after 5 minutes.

@@ -4,6 +4,7 @@ import {
   useClearEditorContent,
   useEditorContentValue,
 } from '@src/states/editorStates';
+import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import useAppToast from './useAppToast';
 import useSavePost from './useSavePost';
@@ -12,8 +13,14 @@ export default function useEditor() {
   const history = useHistory();
   const content = useEditorContentValue();
   const { clearEditorContent } = useClearEditorContent();
-  const { save, loading } = useSavePost();
+  const { save, loading, error } = useSavePost();
   const { notify } = useAppToast();
+
+  useEffect(() => {
+    if (!error) return;
+    const errorMessage = `Save Failed : ${error}`;
+    notify(errorMessage, 'error');
+  }, [error, notify]);
 
   const onSave = () => {
     if (!content?.title) {
