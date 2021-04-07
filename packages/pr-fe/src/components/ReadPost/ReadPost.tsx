@@ -49,12 +49,12 @@ function ReadPost(props: ReadPostProps) {
       <h1 className="title">{postContent.title}</h1>
       <p className="date">{postContent.date.toLocaleString()}</p>
       <Viewer markdown={postContent.body} />
-      <footer css={footer}>footer</footer>
     </div>
   );
 }
 
 const viewerWrapper = css`
+  height: 100%;
   ${responsiveWidth};
   display: flex;
   flex-direction: column;
@@ -62,7 +62,6 @@ const viewerWrapper = css`
     margin: 0;
     padding: 0;
     line-height: 1.5;
-    margin-top: 3rem;
     margin-bottom: 0.5rem;
     padding-bottom: 1rem;
     border-bottom: 0.0625rem solid ${palette.lightBlue[200]};
@@ -75,11 +74,6 @@ const viewerWrapper = css`
     text-align: right;
     margin-bottom: 3rem;
   }
-`;
-
-const footer = css`
-  justify-self: flex-end;
-  height: 5rem;
 `;
 
 export default ReadPost;

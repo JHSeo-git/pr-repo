@@ -3,11 +3,11 @@ const custom = (z: number) => `
 `;
 
 const zIndex = {
-  fullScreenLoader: 900,
-  alert: 600,
-  modal: 500,
-  fixedHeader: 300,
-  fixedFooter: 300,
+  fullScreenLoader: custom(900),
+  alert: custom(600),
+  modal: custom(500),
+  fixedHeader: custom(300),
+  fixedFooter: custom(300),
   custom,
 };
 

@@ -22,4 +22,5 @@
 
 ## else...
 
-- By default, "inactive" queries are garbage collected after 5 minutes.
+- https://react-query.tanstack.com/guides/caching#basic-example
+  By default, "inactive" queries are garbage collected after 5 minutes.

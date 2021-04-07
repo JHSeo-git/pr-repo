@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { css } from '@emotion/react';
 import PostItem from './PostItem';
 import PostItemSkelecton from './PostItemSkelecton';
@@ -16,8 +16,9 @@ type PostsType = {
 }[];
 
 function PostList(props: PostListProps) {
+  const ref = useRef<boolean>(true);
   const { owner, repo } = useGithubAPIValue();
-  const { data: githubData } = useGetGithubPostsQuery(
+  const { data: githubData, refetch } = useGetGithubPostsQuery(
     {
       owner: owner!,
       repo: repo!,
@@ -27,6 +28,13 @@ function PostList(props: PostListProps) {
       refetchOnWindowFocus: true,
     }
   );
+
+  useEffect(() => {
+    if (ref?.current) {
+      refetch();
+      ref.current = false;
+    }
+  }, [refetch]);
 
   const posts = useMemo<PostsType | null>(() => {
     if (!githubData) return null;
@@ -67,7 +75,6 @@ const listStyle = css`
   margin: 0;
   list-style: none;
   padding-bottom: 2rem;
-  margin-top: 2rem;
   ${responsiveWidth};
 `;
 

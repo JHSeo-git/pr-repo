@@ -19,7 +19,7 @@ function FloatLink({ name, to }: FloatLinkProps) {
 const floatStyle = css`
   position: fixed;
   right: 2rem;
-  bottom: 4rem;
+  bottom: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;

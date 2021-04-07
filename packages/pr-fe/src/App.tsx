@@ -8,6 +8,8 @@ import HeaderNav from './components/HeaderNav';
 import DebugObserver from './components/DebugObserver';
 import AppToast from './components/AppToast';
 import Post from './pages/Post';
+import ScrollToTop from './components/Layout/ScrollToTop';
+import AppInfo from './components/AppInfo';
 
 function App() {
   return (
@@ -15,6 +17,7 @@ function App() {
       <DebugObserver />
       <Global styles={globalStyle} />
       <BrowserRouter>
+        <ScrollToTop />
         <Switch>
           <Layout>
             <AppToast />
@@ -23,13 +26,18 @@ function App() {
                 <HeaderNav />
               </Layout.Header>
               <Layout.Main>
-                <Route exact path="/">
-                  <Posts />
-                </Route>
-                <Route exact path="/post/:path">
-                  <Post />
-                </Route>
+                <Switch>
+                  <Route exact path="/">
+                    <Posts />
+                  </Route>
+                  <Route exact path="/post/:path">
+                    <Post />
+                  </Route>
+                </Switch>
               </Layout.Main>
+              <Layout.Footer>
+                <AppInfo />
+              </Layout.Footer>
             </Route>
             <Route path="/new-post">
               <Write />
