@@ -22,6 +22,8 @@ function Viewer({ markdown }: ViewerProps) {
       <ReactViewer
         initialValue={markdown}
         plugins={[syntaxHighlightViewerPlugIn]}
+        extendedAutolinks={true}
+        referenceDefinition={true}
       />
     </TUIWrapper>
   );

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { toast, ToastOptions } from 'react-toastify';
 
 type NotifyType = 'info' | 'success' | 'error';
@@ -33,9 +32,9 @@ export default function useAppToast() {
 
   const clearAllToast = () => toast.dismiss();
 
-  useEffect(() => {
-    return () => clearAllToast();
-  }, []);
+  // useEffect(() => {
+  //   return () => clearAllToast();
+  // }, []);
 
   return { notify, clearAllToast };
 }

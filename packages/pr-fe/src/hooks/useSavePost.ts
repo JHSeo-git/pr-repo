@@ -75,14 +75,14 @@ export default function useSavePost() {
         sha: newCommit.sha,
         force: true,
       });
-      const mergeResult = await githubApi.mergeToMaster({
+      await githubApi.mergeToMaster({
         owner,
         repo,
         head: newBranchName,
         base: 'master',
       });
 
-      console.log('merge Result', mergeResult);
+      notify('Success Post!', 'success');
     } catch (e) {
       const issueTitle = `Save Post Error ${newBranchName}`;
       const issueBody = `

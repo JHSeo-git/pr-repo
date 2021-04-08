@@ -4,6 +4,7 @@ type GithubAPIType = {
   owner?: string;
   repo?: string;
   master?: string;
+  postPath?: string;
 };
 export const githubAPIState = atom<GithubAPIType>({
   key: 'githubAPIState',
@@ -11,6 +12,7 @@ export const githubAPIState = atom<GithubAPIType>({
     owner: undefined,
     repo: undefined,
     master: undefined,
+    postPath: undefined,
   },
 });
 

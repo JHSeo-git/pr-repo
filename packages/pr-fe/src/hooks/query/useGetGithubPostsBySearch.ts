@@ -1,19 +1,11 @@
 import getPostsBySearch from '@src/lib/github-api/getPostsBySearch';
 import { GetPostsBySearchPayload } from '@src/lib/github-api/types';
-import { Unwrap } from '@src/lib/utils/types';
-import {
-  InfiniteData,
-  useInfiniteQuery,
-  UseInfiniteQueryOptions,
-} from 'react-query';
+import { PostSearchResult } from '@src/lib/types/post';
+import { useInfiniteQuery, UseInfiniteQueryOptions } from 'react-query';
 
 export default function useGetGithubPostsBySearch(
   { owner, repo, extension, path, perPage }: GetPostsBySearchPayload,
-  options: UseInfiniteQueryOptions<
-    Unwrap<typeof getPostsBySearch>,
-    unknown,
-    InfiniteData<Unwrap<typeof getPostsBySearch>>
-  > = {}
+  options: UseInfiniteQueryOptions<PostSearchResult, unknown, PostSearchResult>
 ) {
   return useInfiniteQuery(
     createKey(),
@@ -28,7 +20,7 @@ export default function useGetGithubPostsBySearch(
       }),
     {
       getNextPageParam: (lastPage) =>
-        lastPage.items.length === perPage ? lastPage.nextPage : undefined,
+        lastPage.data.length === perPage ? lastPage.nextPage : undefined,
       ...options,
     }
   );

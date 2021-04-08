@@ -16,8 +16,12 @@ export default async function getPostsBySearch({
     page,
   });
 
+  const data = response.data.items.map((item) => ({
+    path: item.path,
+  }));
+
   return {
-    items: response.data.items,
+    data,
     totalCount: response.data.total_count,
     nextPage: page + 1,
   };

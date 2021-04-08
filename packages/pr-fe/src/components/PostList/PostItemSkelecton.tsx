@@ -1,13 +1,16 @@
-import React from 'react';
-import { css, keyframes } from '@emotion/react';
+import React, { forwardRef } from 'react';
+import { css } from '@emotion/react';
 import palette from '@src/lib/styles/palette';
 import { flash } from '@src/lib/styles/animation';
 
 export type PostItemSkelectonProps = {};
 
-function PostItemSkelecton(props: PostItemSkelectonProps) {
+function PostItemSkelecton(
+  props: PostItemSkelectonProps,
+  ref: React.Ref<HTMLDivElement>
+) {
   return (
-    <div css={skeleton}>
+    <div css={skeleton} ref={ref}>
       <div css={pointBorder}></div>
       <div css={titleStyle}></div>
       <div css={contentStyle}></div>
@@ -55,4 +58,6 @@ const contentStyle = css`
   animation: ${flash} 1s ease-in-out infinite;
 `;
 
-export default PostItemSkelecton;
+export default forwardRef<HTMLDivElement, PostItemSkelectonProps>(
+  PostItemSkelecton
+);

@@ -4,49 +4,64 @@ import { css } from '@emotion/react';
 import PostItem from './PostItem';
 import PostItemSkelecton from './PostItemSkelecton';
 import { responsiveWidth } from '@src/lib/styles/responsive';
-import useGetGithubPostsByTreeQuery from '@src/hooks/query/useGetGithubPostsByTreeQuery';
 import { useGithubAPIValue } from '@src/states/githubAPIstates';
 import { undrawEmpty } from '@src/assets/images';
 import palette from '@src/lib/styles/palette';
 import media from '@src/lib/styles/media';
 import FloatLink from '../FloatLink';
+import useGetGithubPostsBySearch from '@src/hooks/query/useGetGithubPostsBySearch';
 
 export type PostListProps = {};
 
-type PostsType = {
-  path?: string;
-}[];
-
 function PostList(props: PostListProps) {
-  const ref = useRef<boolean>(true);
-  const { owner, repo } = useGithubAPIValue();
-  const { data: githubData, refetch } = useGetGithubPostsByTreeQuery(
+  const { owner, repo, postPath } = useGithubAPIValue();
+  const {
+    data: githubData,
+    hasNextPage,
+    fetchNextPage,
+  } = useGetGithubPostsBySearch(
     {
       owner: owner!,
       repo: repo!,
+      path: postPath!,
+      extension: 'md',
+      perPage: 10,
     },
     {
-      enabled: owner !== undefined && repo !== undefined,
+      enabled:
+        owner !== undefined && repo !== undefined && postPath !== undefined,
       refetchOnWindowFocus: true,
     }
   );
 
-  useEffect(() => {
-    if (ref?.current) {
-      refetch();
-      ref.current = false;
-    }
-  }, [refetch]);
-
-  const posts = useMemo<PostsType | null>(() => {
+  const posts = useMemo(() => {
     if (!githubData) return null;
 
-    return githubData
-      .map((item) => ({
-        path: item.path,
-      }))
-      .sort((a, b) => (a.path! > b.path! ? -1 : a.path! < b.path! ? 1 : 0));
+    return githubData.pages.flatMap((page) => page.data);
   }, [githubData]);
+
+  const infiniteRef = useRef<HTMLDivElement>(null);
+  const observer = useMemo(
+    () =>
+      new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            fetchNextPage();
+          }
+        });
+      }),
+    [fetchNextPage]
+  );
+
+  useEffect(() => {
+    if (!posts) return;
+    if (!infiniteRef.current) return;
+    const el = infiniteRef.current;
+    observer.observe(el);
+    return () => {
+      observer.unobserve(el);
+    };
+  }, [posts, observer]);
 
   if (posts && posts.length === 0)
     return (
@@ -55,6 +70,7 @@ function PostList(props: PostListProps) {
         <h1>No Posts</h1>
       </div>
     );
+  if (!posts) return null;
 
   return (
     <>
@@ -69,6 +85,13 @@ function PostList(props: PostListProps) {
           : Array.from({ length: 5 }).map((_, i) => (
               <PostItemSkelecton key={i} />
             ))}
+        {hasNextPage &&
+          Array.from({ length: 5 }).map((_, i) => (
+            <PostItemSkelecton
+              key={i}
+              ref={i === 0 ? infiniteRef : undefined}
+            />
+          ))}
       </ul>
       <FloatLink name="write" to="/new-post" />
     </>

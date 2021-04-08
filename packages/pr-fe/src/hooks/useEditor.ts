@@ -14,13 +14,19 @@ export default function useEditor() {
   const content = useEditorContentValue();
   const { reset } = useResetEditorContent();
   const { save, loading, error } = useSavePost();
-  const { notify } = useAppToast();
+  const { notify, clearAllToast } = useAppToast();
 
   useEffect(() => {
     if (!error) return;
     const errorMessage = `Save Failed : ${error}`;
     notify(errorMessage, 'error');
   }, [error, notify]);
+
+  useEffect(() => {
+    return () => {
+      clearAllToast();
+    };
+  }, [clearAllToast]);
 
   const onSave = () => {
     if (!content?.title) {
