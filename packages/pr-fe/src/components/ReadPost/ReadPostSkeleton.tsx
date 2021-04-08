@@ -31,13 +31,13 @@ const skeleton = css`
 
   .skeleton {
     border-radius: 0.1875rem;
-    background: ${palette.grey[100]};
+    background: ${palette.grey[200]};
     animation: ${flash} 1s ease-in-out infinite;
   }
 
   .title {
     width: 100%;
-    height: 5rem;
+    height: 4rem;
     margin-bottom: 0.5rem;
   }
   .date {

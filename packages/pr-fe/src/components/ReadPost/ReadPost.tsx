@@ -19,9 +19,10 @@ function ReadPost(props: ReadPostProps) {
 
   return (
     <>
-      <div css={viewerWrapper}>
+      <ReadPostSkeleton />
+      {/* <div css={viewerWrapper}>
         <h1 className="title">{postContent.title}</h1>
-        <p className="date">{postContent.date.toLocaleString()}</p>
+        <p className="date">Published : {postContent.date.toLocaleString()}</p>
         <Viewer markdown={postContent.body} />
       </div>
       {postContent.path && (
@@ -29,7 +30,7 @@ function ReadPost(props: ReadPostProps) {
           name="fix"
           to={`/edit/${encodeParamSlash(postContent.path)}`}
         />
-      )}
+      )} */}
     </>
   );
 }

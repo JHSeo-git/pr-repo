@@ -11,9 +11,9 @@ function PostItemSkelecton(
 ) {
   return (
     <div css={skeleton} ref={ref}>
-      <div css={pointBorder}></div>
-      <div css={titleStyle}></div>
-      <div css={contentStyle}></div>
+      <div css={[skeletonStyle, pointBorder]}></div>
+      <div css={[skeletonStyle, titleStyle]}></div>
+      <div css={[skeletonStyle, contentStyle]}></div>
     </div>
   );
 }
@@ -30,13 +30,17 @@ const skeleton = css`
   }
 `;
 
+const skeletonStyle = css`
+  background: ${palette.grey[200]};
+  animation: ${flash} 1s ease-in-out infinite;
+`;
+
 const pointBorder = css`
   border-top-left-radius: 0.1875rem;
   border-top-right-radius: 0.1875rem;
   height: 0.5rem;
   margin-bottom: 1rem;
   background: ${palette.grey[100]};
-  animation: ${flash} 1s ease-in-out infinite;
 `;
 
 const titleStyle = css`
@@ -46,16 +50,12 @@ const titleStyle = css`
   margin-left: 1rem;
   margin-right: 1rem;
   border-radius: 0.5rem;
-  background: ${palette.grey[100]};
-  animation: ${flash} 1s ease-in-out infinite;
 `;
 const contentStyle = css`
   height: 3rem;
   margin-left: 1rem;
   margin-right: 1rem;
   border-radius: 0.5rem;
-  background: ${palette.grey[100]};
-  animation: ${flash} 1s ease-in-out infinite;
 `;
 
 export default forwardRef<HTMLDivElement, PostItemSkelectonProps>(
