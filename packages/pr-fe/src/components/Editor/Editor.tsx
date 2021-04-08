@@ -3,7 +3,7 @@ import 'highlight.js/styles/atom-one-light.css';
 import 'tui-color-picker/dist/tui-color-picker.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Editor as ReactEditor } from '@toast-ui/react-editor';
 
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
@@ -16,13 +16,22 @@ import TUIWrapper from '../TUIWrapper';
 export type EditorProps = {};
 
 function Editor(props: EditorProps) {
+  const firstCome = useRef(true);
   const editorRef = useRef<ReactEditor>(null);
-  const [, setEditorMarkdown] = useEditorMarkdownState();
+  const [markdown, setEditorMarkdown] = useEditorMarkdownState();
 
   const onChange = () => {
     if (!editorRef.current) return;
     setEditorMarkdown(editorRef.current.getInstance().getMarkdown());
   };
+
+  useEffect(() => {
+    if (!markdown) return;
+    if (!editorRef?.current) return;
+    if (!firstCome.current) return;
+    editorRef.current.getInstance().setMarkdown(markdown);
+    firstCome.current = false;
+  }, [markdown, editorRef]);
 
   return (
     <TUIWrapper>

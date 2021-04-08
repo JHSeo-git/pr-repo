@@ -81,12 +81,12 @@ const headerStyle = css`
 `;
 
 const footerStyle = css`
-  height: 4rem;
+  height: 2.5rem;
   border-top: 0.0625rem solid ${palette.blueGrey[50]};
 `;
 
 const mainStyle = css`
-  min-height: calc(100% - (4rem + 4rem));
+  min-height: calc(100% - (4rem + 2.5rem));
   padding-top: 2rem;
   padding-bottom: 4rem;
 `;

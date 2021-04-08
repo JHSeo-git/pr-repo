@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { useClearEditorContent } from '@src/states/editorStates';
+import { useResetEditorContent } from '@src/states/editorStates';
 import { useEffect } from 'react';
 import Editor from '../Editor';
 import WritePostFooter from '../WritePostFooter';
@@ -8,10 +8,12 @@ import WritePostTitleInput from './WritePostTitleInput';
 export type WritePostProps = {};
 
 function WritePost(props: WritePostProps) {
-  const { clearEditorContent } = useClearEditorContent();
+  const { reset } = useResetEditorContent();
   useEffect(() => {
-    return () => clearEditorContent();
-  }, [clearEditorContent]);
+    return () => {
+      reset();
+    };
+  }, [reset]);
 
   return (
     <div css={editorWrapper}>

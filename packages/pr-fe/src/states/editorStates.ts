@@ -1,31 +1,33 @@
+import { useCallback } from 'react';
 import {
   atom,
   selector,
   useRecoilState,
   useRecoilValue,
   useResetRecoilState,
+  useSetRecoilState,
 } from 'recoil';
 
-export const editorMarkdown = atom<string | null>({
-  key: 'editorMarkdown',
+export const editorMarkdownState = atom<string | null>({
+  key: 'editorMarkdownState',
   default: null,
 });
 
-export const editorTitle = atom<string | null>({
-  key: 'editorTitle',
+export const editorTitleState = atom<string | null>({
+  key: 'editorTitleState',
   default: null,
 });
 
-export type EditorContent = {
+export type EditorContentType = {
   title: string | null;
   markDown: string | null;
 };
 
-export const editorContent = selector<EditorContent | null>({
-  key: 'editorContent',
+export const editorContentState = selector<EditorContentType | null>({
+  key: 'editorContentState',
   get: ({ get }) => {
-    const title = get(editorTitle);
-    const markDown = get(editorMarkdown);
+    const title = get(editorTitleState);
+    const markDown = get(editorMarkdownState);
 
     return {
       title,
@@ -35,27 +37,42 @@ export const editorContent = selector<EditorContent | null>({
 });
 
 export function useEditorContentValue() {
-  return useRecoilValue(editorContent);
+  return useRecoilValue(editorContentState);
 }
 
 export function useEditorMarkdownState() {
-  return useRecoilState(editorMarkdown);
+  return useRecoilState(editorMarkdownState);
 }
 
 export function useEditorTitleState() {
-  return useRecoilState(editorTitle);
+  return useRecoilState(editorTitleState);
 }
 
-export function useClearEditorContent() {
-  const resetTitle = useResetRecoilState(editorTitle);
-  const resetMarkdown = useResetRecoilState(editorMarkdown);
+export function useResetEditorContent() {
+  const resetTitle = useResetRecoilState(editorTitleState);
+  const resetMarkdown = useResetRecoilState(editorMarkdownState);
 
-  const clearEditorContent = () => {
+  const reset = () => {
     resetTitle();
     resetMarkdown();
   };
 
   return {
-    clearEditorContent,
+    reset,
   };
+}
+
+export function useEditorSync() {
+  const setTitle = useSetRecoilState(editorTitleState);
+  const setMarkdown = useSetRecoilState(editorMarkdownState);
+
+  const sync = useCallback(
+    (data: EditorContentType) => {
+      setTitle(data.title);
+      setMarkdown(data.markDown);
+    },
+    [setTitle, setMarkdown]
+  );
+
+  return sync;
 }

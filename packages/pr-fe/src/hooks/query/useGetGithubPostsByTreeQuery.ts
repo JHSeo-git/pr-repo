@@ -5,7 +5,7 @@ import { useQuery } from 'react-query';
 
 type QueryProps = {} & GetPostsByRecursivePayload;
 
-export default function useGetGithubPostsQuery(
+export default function useGetGithubPostsByTreeQuery(
   { owner, repo, ref }: QueryProps,
   options: QueryOptionsOf<typeof getPostsByRecursive> = {}
 ) {
@@ -23,4 +23,4 @@ export default function useGetGithubPostsQuery(
 
 const createKey = () => ['posts'];
 
-useGetGithubPostsQuery.createKey = createKey;
+useGetGithubPostsByTreeQuery.createKey = createKey;

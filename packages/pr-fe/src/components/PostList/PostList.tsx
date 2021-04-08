@@ -1,13 +1,15 @@
+import React from 'react';
 import { useEffect, useMemo, useRef } from 'react';
 import { css } from '@emotion/react';
 import PostItem from './PostItem';
 import PostItemSkelecton from './PostItemSkelecton';
 import { responsiveWidth } from '@src/lib/styles/responsive';
-import useGetGithubPostsQuery from '@src/hooks/query/useGetGithubPostsQuery';
+import useGetGithubPostsByTreeQuery from '@src/hooks/query/useGetGithubPostsByTreeQuery';
 import { useGithubAPIValue } from '@src/states/githubAPIstates';
 import { undrawEmpty } from '@src/assets/images';
 import palette from '@src/lib/styles/palette';
 import media from '@src/lib/styles/media';
+import FloatLink from '../FloatLink';
 
 export type PostListProps = {};
 
@@ -18,7 +20,7 @@ type PostsType = {
 function PostList(props: PostListProps) {
   const ref = useRef<boolean>(true);
   const { owner, repo } = useGithubAPIValue();
-  const { data: githubData, refetch } = useGetGithubPostsQuery(
+  const { data: githubData, refetch } = useGetGithubPostsByTreeQuery(
     {
       owner: owner!,
       repo: repo!,
@@ -55,18 +57,21 @@ function PostList(props: PostListProps) {
     );
 
   return (
-    <ul css={listStyle}>
-      {posts
-        ? posts.map(
-            (post, i) =>
-              post.path && (
-                <PostItem key={post.path} index={i} path={post.path} />
-              )
-          )
-        : Array.from({ length: 5 }).map((_, i) => (
-            <PostItemSkelecton key={i} />
-          ))}
-    </ul>
+    <>
+      <ul css={listStyle}>
+        {posts
+          ? posts.map(
+              (post, i) =>
+                post.path && (
+                  <PostItem key={post.path} index={i} path={post.path} />
+                )
+            )
+          : Array.from({ length: 5 }).map((_, i) => (
+              <PostItemSkelecton key={i} />
+            ))}
+      </ul>
+      <FloatLink name="write" to="/new-post" />
+    </>
   );
 }
 

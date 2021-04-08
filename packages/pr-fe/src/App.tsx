@@ -10,6 +10,7 @@ import AppToast from './components/AppToast';
 import Post from './pages/Post';
 import ScrollToTop from './components/Layout/ScrollToTop';
 import AppInfo from './components/AppInfo';
+import Edit from './pages/Edit';
 
 function App() {
   return (
@@ -41,6 +42,9 @@ function App() {
             </Route>
             <Route path="/new-post">
               <Write />
+            </Route>
+            <Route path="/edit/:pathslug">
+              <Edit />
             </Route>
           </Layout>
           <Redirect to="/" />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { css, keyframes } from '@emotion/react';
 import palette from '@src/lib/styles/palette';
+import { flash } from '@src/lib/styles/animation';
 
 export type PostItemSkelectonProps = {};
 
@@ -24,18 +25,6 @@ const skeleton = css`
   & + & {
     margin-top: 1.5rem;
   }
-`;
-
-const flash = keyframes`
-  0%{
-    background: ${palette.grey[100]};
-  },
-  50%{
-    background: ${palette.grey[200]};
-  },
-  100%{
-    background: ${palette.grey[100]};
-  },
 `;
 
 const pointBorder = css`

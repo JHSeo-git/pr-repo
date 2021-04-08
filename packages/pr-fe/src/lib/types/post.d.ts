@@ -8,4 +8,5 @@ export type FrontMatterType = {
 
 export type PostWithFrontmatterType = {
   body: string;
+  path?: string;
 } & FrontMatterType;

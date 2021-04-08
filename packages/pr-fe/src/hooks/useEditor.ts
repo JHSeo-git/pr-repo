@@ -1,7 +1,7 @@
 import { generateUrlSlug } from '@src/lib/utils/common';
 import { makeContentWithFrontmatter } from '@src/lib/utils/markdownUtil';
 import {
-  useClearEditorContent,
+  useResetEditorContent,
   useEditorContentValue,
 } from '@src/states/editorStates';
 import { useEffect } from 'react';
@@ -12,7 +12,7 @@ import useSavePost from './useSavePost';
 export default function useEditor() {
   const history = useHistory();
   const content = useEditorContentValue();
-  const { clearEditorContent } = useClearEditorContent();
+  const { reset } = useResetEditorContent();
   const { save, loading, error } = useSavePost();
   const { notify } = useAppToast();
 
@@ -49,7 +49,7 @@ export default function useEditor() {
   };
 
   const onCancel = () => {
-    clearEditorContent();
+    reset();
     history.replace('/');
   };
 
