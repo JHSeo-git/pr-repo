@@ -11,6 +11,7 @@ function TUIWrapper({ children }: TUIWrapperProps) {
 
 const tuiBox = css`
   height: 100%;
+  position: relative;
 
   .te-toolbar-section {
   }

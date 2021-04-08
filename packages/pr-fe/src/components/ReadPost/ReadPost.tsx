@@ -1,11 +1,10 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import palette from '@src/lib/styles/palette';
-import { responsiveWidth } from '@src/lib/styles/responsive';
+import { responsiveReadPostWidth } from '@src/lib/styles/responsive';
 import { decodeParamSlash, encodeParamSlash } from '@src/lib/utils/common';
 import { useParams } from 'react-router';
 import FloatLink from '../FloatLink';
-import Viewer from '../Viewer';
 import useGetGithubPost from '@src/hooks/useGetGithubPost';
 import ReadPostSkeleton from './ReadPostSkeleton';
 import MarkdownItViewer from '../Viewer/MarkdownItViewer';
@@ -21,10 +20,10 @@ function ReadPost(props: ReadPostProps) {
   return (
     <>
       <div css={viewerWrapper}>
-        <MarkdownItViewer markdown={postContent.body} />
         <h1 className="title">{postContent.title}</h1>
         <p className="date">Published : {postContent.date.toLocaleString()}</p>
-        <Viewer markdown={postContent.body} />
+        <MarkdownItViewer markdown={postContent.body} />
+        {/* <Viewer markdown={postContent.body} /> */}
       </div>
       {postContent.path && (
         <FloatLink
@@ -38,7 +37,7 @@ function ReadPost(props: ReadPostProps) {
 
 const viewerWrapper = css`
   height: 100%;
-  ${responsiveWidth};
+  ${responsiveReadPostWidth};
   display: flex;
   flex-direction: column;
   .title {
