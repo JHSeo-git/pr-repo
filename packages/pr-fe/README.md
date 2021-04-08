@@ -5,6 +5,7 @@
 - react-query
 - axios
 - @octokit/core
+- markdown-it & [...plugin]
 
 ## github api
 

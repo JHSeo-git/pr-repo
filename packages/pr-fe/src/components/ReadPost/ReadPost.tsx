@@ -8,6 +8,7 @@ import FloatLink from '../FloatLink';
 import Viewer from '../Viewer';
 import useGetGithubPost from '@src/hooks/useGetGithubPost';
 import ReadPostSkeleton from './ReadPostSkeleton';
+import MarkdownItViewer from '../Viewer/MarkdownItViewer';
 
 export type ReadPostProps = {};
 
@@ -20,6 +21,7 @@ function ReadPost(props: ReadPostProps) {
   return (
     <>
       <div css={viewerWrapper}>
+        <MarkdownItViewer markdown={postContent.body} />
         <h1 className="title">{postContent.title}</h1>
         <p className="date">Published : {postContent.date.toLocaleString()}</p>
         <Viewer markdown={postContent.body} />

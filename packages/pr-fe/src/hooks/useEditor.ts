@@ -22,11 +22,11 @@ export default function useEditor() {
     notify(errorMessage, 'error');
   }, [error, notify]);
 
-  useEffect(() => {
-    return () => {
-      clearAllToast();
-    };
-  }, [clearAllToast]);
+  // useEffect(() => {
+  //   return () => {
+  //     clearAllToast();
+  //   };
+  // }, [clearAllToast]);
 
   const onSave = () => {
     if (!content?.title) {
@@ -56,6 +56,7 @@ export default function useEditor() {
 
   const onCancel = () => {
     reset();
+    clearAllToast();
     history.replace('/');
   };
 

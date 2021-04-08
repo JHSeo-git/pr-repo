@@ -31,7 +31,7 @@ function App() {
                   <Route exact path="/">
                     <Posts />
                   </Route>
-                  <Route exact path="/post/:path">
+                  <Route path="/post/:path">
                     <Post />
                   </Route>
                 </Switch>
