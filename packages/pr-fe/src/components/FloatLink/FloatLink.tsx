@@ -3,23 +3,39 @@ import palette from '@src/lib/styles/palette';
 import { Link } from 'react-router-dom';
 import AppIcon, { IconType } from '../AppIcon/AppIcon';
 
+type PositionType = 'top' | 'bottom';
+
 export type FloatLinkProps = {
   name: IconType;
   to: string;
+  position?: PositionType;
+  color?: string;
 };
 
-function FloatLink({ name, to }: FloatLinkProps) {
+function FloatLink({
+  name,
+  to,
+  position = 'bottom',
+  color = palette.blue[500],
+}: FloatLinkProps) {
   return (
-    <Link css={floatStyle} to={to}>
+    <Link css={floatStyle(position, color)} to={to}>
       <AppIcon name={name} />
     </Link>
   );
 }
 
-const floatStyle = css`
+const floatStyle = (position: PositionType, color: string) => css`
   position: fixed;
   right: 2rem;
-  bottom: 3rem;
+  ${position === 'bottom' &&
+  css`
+    bottom: 3rem;
+  `}
+  ${position === 'top' &&
+  css`
+    bottom: 8rem;
+  `}
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,7 +43,7 @@ const floatStyle = css`
   height: 4rem;
   width: 4rem;
   border-radius: 50%;
-  background: ${palette.blue[500]};
+  background: ${color};
   svg {
     height: 2rem;
     width: 2rem;

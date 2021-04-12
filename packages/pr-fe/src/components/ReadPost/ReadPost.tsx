@@ -29,8 +29,11 @@ function ReadPost(props: ReadPostProps) {
         <FloatLink
           name="fix"
           to={`/edit/${encodeParamSlash(postContent.path)}`}
+          position="top"
+          color={palette.indigo[500]}
         />
       )}
+      <FloatLink name="write" to={'/new-post'} position="bottom" />
     </>
   );
 }

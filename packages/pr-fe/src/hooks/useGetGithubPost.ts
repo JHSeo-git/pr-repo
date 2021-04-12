@@ -13,7 +13,11 @@ export default function useGetGithubPost(path?: string) {
       path: path!,
     },
     {
-      enabled: path !== undefined && owner !== undefined && repo !== undefined,
+      enabled:
+        path !== undefined &&
+        path !== null &&
+        owner !== undefined &&
+        repo !== undefined,
     }
   );
 

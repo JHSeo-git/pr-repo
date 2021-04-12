@@ -57,7 +57,7 @@ export default function useEditor() {
   const onCancel = () => {
     reset();
     clearAllToast();
-    history.replace('/');
+    history.goBack();
   };
 
   return {

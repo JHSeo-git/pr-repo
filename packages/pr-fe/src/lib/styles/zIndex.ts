@@ -8,6 +8,7 @@ const zIndex = {
   modal: custom(500),
   fixedHeader: custom(300),
   fixedFooter: custom(300),
+  fixedTOC: custom(200),
   custom,
 };
 

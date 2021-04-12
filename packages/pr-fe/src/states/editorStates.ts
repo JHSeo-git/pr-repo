@@ -18,6 +18,11 @@ export const editorTitleState = atom<string | null>({
   default: null,
 });
 
+export const observedHeadingIdState = atom<string | null>({
+  key: 'observedHeadingIdState',
+  default: null,
+});
+
 export type EditorContentType = {
   title: string | null;
   markDown: string | null;
@@ -46,6 +51,10 @@ export function useEditorMarkdownState() {
 
 export function useEditorTitleState() {
   return useRecoilState(editorTitleState);
+}
+
+export function useObservedHeadingIdState() {
+  return useRecoilState(observedHeadingIdState);
 }
 
 export function useResetEditorContent() {
