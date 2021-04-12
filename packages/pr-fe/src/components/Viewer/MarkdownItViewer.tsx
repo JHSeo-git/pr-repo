@@ -11,7 +11,7 @@ export type MarkdownItViewerProps = {
   markdown: string;
 };
 
-function MarkdownItViewer({ markdown, ...reset }: MarkdownItViewerProps) {
+function MarkdownItViewer({ markdown }: MarkdownItViewerProps) {
   const ref = useRef<HTMLDivElement>(null);
   const fixedTocPos = 100;
 
