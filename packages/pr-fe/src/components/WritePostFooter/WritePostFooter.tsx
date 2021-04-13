@@ -5,12 +5,12 @@ import WritePostButton from '../WritePostButton';
 export type WritePostFooterProps = {};
 
 function WritePostFooter(props: WritePostFooterProps) {
-  const { onSave, onCancel, loading } = useEditor();
+  const { onSave, onCancel, loading, updateModeInfo } = useEditor();
   return (
     <footer css={block}>
       <WritePostButton text="Cancel" onClick={onCancel} />
       <WritePostButton
-        text="Push"
+        text={updateModeInfo.updateMode ? 'Update' : 'Save'}
         primary={true}
         onClick={onSave}
         loading={loading}

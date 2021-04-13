@@ -9,6 +9,7 @@ const zIndex = {
   fixedHeader: custom(300),
   fixedFooter: custom(300),
   fixedTOC: custom(200),
+  absoluteImg: custom(100),
   custom,
 };
 

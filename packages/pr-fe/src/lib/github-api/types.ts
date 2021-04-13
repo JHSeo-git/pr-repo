@@ -31,6 +31,7 @@ type GitTreeType = {
 };
 export type CreateTreePayload = {
   tree: GitTreeType[];
+  baseTree?: string;
 } & GitPayload;
 
 export type CreateCommitPayload = {

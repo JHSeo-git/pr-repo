@@ -30,11 +30,11 @@ const floatStyle = (position: PositionType, color: string) => css`
   right: 2rem;
   ${position === 'bottom' &&
   css`
-    bottom: 3rem;
+    bottom: 4rem;
   `}
   ${position === 'top' &&
   css`
-    bottom: 8rem;
+    bottom: 9rem;
   `}
   display: flex;
   justify-content: center;

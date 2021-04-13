@@ -14,11 +14,22 @@ function ReadPostSkeleton(props: ReadPostSkeletonProps) {
         <div className="skeleton h"></div>
         <div className="skeleton p"></div>
         <div className="skeleton image"></div>
+        <div className="skeleton p"></div>
+        <div className="skeleton image"></div>
       </div>
       <div className="content">
         <div className="skeleton h"></div>
         <div className="skeleton p"></div>
+        <div className="skeleton p"></div>
+        <div className="skeleton p"></div>
         <div className="skeleton image"></div>
+      </div>
+      <div className="content">
+        <div className="skeleton h"></div>
+        <div className="skeleton image"></div>
+        <div className="skeleton p"></div>
+        <div className="skeleton p"></div>
+        <div className="skeleton p"></div>
       </div>
     </div>
   );
@@ -61,6 +72,7 @@ const skeleton = css`
     }
     .image {
       height: 7rem;
+      margin-bottom: 0.5rem;
     }
   }
 `;

@@ -5,16 +5,17 @@ import PostItem from './PostItem';
 import PostItemSkelecton from './PostItemSkelecton';
 import { responsiveWidth } from '@src/lib/styles/responsive';
 import { useGithubAPIValue } from '@src/states/githubAPIstates';
-import { undrawEmpty } from '@src/assets/images';
-import palette from '@src/lib/styles/palette';
-import media from '@src/lib/styles/media';
 import FloatLink from '../FloatLink';
 import useGetGithubPostsBySearch from '@src/hooks/query/useGetGithubPostsBySearch';
+import AlertInfo from '../AlertInfo';
+import { useNoCachePostValue } from '@src/states/reactQueryState';
+import useNoCachePostListEffect from '@src/hooks/useNoCachePostListEffect';
 
 export type PostListProps = {};
 
 function PostList(props: PostListProps) {
   const { owner, repo, postPath } = useGithubAPIValue();
+  const noCache = useNoCachePostValue();
   const {
     data: githubData,
     hasNextPage,
@@ -33,6 +34,8 @@ function PostList(props: PostListProps) {
       refetchOnWindowFocus: true,
     }
   );
+  console.log(noCache);
+  useNoCachePostListEffect();
 
   const posts = useMemo(() => {
     if (!githubData) return null;
@@ -63,13 +66,6 @@ function PostList(props: PostListProps) {
     };
   }, [posts, observer]);
 
-  if (posts && posts.length === 0)
-    return (
-      <div css={imageWrapper}>
-        <img src={undrawEmpty} alt="empty" />
-        <h1>No Posts</h1>
-      </div>
-    );
   if (!posts) return null;
 
   return (
@@ -93,7 +89,10 @@ function PostList(props: PostListProps) {
             />
           ))}
       </ul>
-      <FloatLink name="write" to="/new-post" />
+      {posts && posts.length === 0 && (
+        <AlertInfo alertType="NoData" text="No Posts" />
+      )}
+      <FloatLink name="write" to="/write" />
     </>
   );
 }
@@ -104,33 +103,6 @@ const listStyle = css`
   list-style: none;
   padding-bottom: 2rem;
   ${responsiveWidth};
-`;
-
-const imageWrapper = css`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  ${responsiveWidth};
-
-  img {
-    width: 20rem;
-    margin-bottom: 2rem;
-  }
-  h1 {
-    font-size: 2.25rem;
-    color: ${palette.blueGrey[600]};
-  }
-
-  ${media.xsmall} {
-    img {
-      width: 13rem;
-    }
-    h1 {
-      font-size: 1.5rem;
-    }
-  }
 `;
 
 export default PostList;

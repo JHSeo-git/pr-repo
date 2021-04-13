@@ -20,7 +20,7 @@ function PostItem({ index, path }: PostItemProps) {
   const { owner, repo } = useGithubAPIValue();
   const history = useHistory();
   const set = useSetViewerState();
-  const { data } = useGetGithubPostQuery(
+  const { data, isError } = useGetGithubPostQuery(
     {
       owner: owner!,
       repo: repo!,
@@ -44,8 +44,6 @@ function PostItem({ index, path }: PostItemProps) {
       path: data.path,
     };
   }, [data]);
-
-  // if (!postContent) return null;
 
   const onClick = () => {
     if (!postContent) return;
@@ -81,6 +79,8 @@ function PostItem({ index, path }: PostItemProps) {
       observer.unobserve(el);
     };
   }, [observer]);
+
+  if (isError) return null;
 
   return (
     <li ref={ref} css={listStyle}>

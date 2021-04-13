@@ -86,6 +86,7 @@ const footerStyle = css`
 `;
 
 const mainStyle = css`
+  position: relative;
   min-height: calc(100% - (4rem + 2.5rem));
   padding-top: 2rem;
   padding-bottom: 4rem;

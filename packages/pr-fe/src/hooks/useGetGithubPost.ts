@@ -1,12 +1,14 @@
 import { PostWithFrontmatterType } from '@src/lib/types/post';
 import { parseFrontmatterOfContent } from '@src/lib/utils/markdownUtil';
 import { useGithubAPIValue } from '@src/states/githubAPIstates';
+import { useNoCachePostValue } from '@src/states/reactQueryState';
 import { useMemo } from 'react';
 import useGetGithubPostQuery from './query/useGetGithubPostQuery';
 
 export default function useGetGithubPost(path?: string) {
   const { owner, repo } = useGithubAPIValue();
-  const { data, isLoading } = useGetGithubPostQuery(
+  const noCache = useNoCachePostValue();
+  const { data, isLoading, isError } = useGetGithubPostQuery(
     {
       owner: owner!,
       repo: repo!,
@@ -18,6 +20,7 @@ export default function useGetGithubPost(path?: string) {
         path !== null &&
         owner !== undefined &&
         repo !== undefined,
+      ...(noCache ? { cacheTime: 0 } : {}),
     }
   );
 
@@ -38,5 +41,6 @@ export default function useGetGithubPost(path?: string) {
   return {
     post: postContent,
     loading: isLoading,
+    isError,
   };
 }

@@ -10,7 +10,7 @@ import AppToast from './components/AppToast';
 import Post from './pages/Post';
 import ScrollToTop from './components/Layout/ScrollToTop';
 import AppInfo from './components/AppInfo';
-import Edit from './pages/Edit';
+import { fontFamily } from './lib/styles/typography';
 
 function App() {
   return (
@@ -40,11 +40,8 @@ function App() {
                 <AppInfo />
               </Layout.Footer>
             </Route>
-            <Route path="/new-post">
+            <Route path="/write/:pathslug?">
               <Write />
-            </Route>
-            <Route path="/edit/:pathslug">
-              <Edit />
             </Route>
           </Layout>
           <Redirect to="/" />
@@ -70,7 +67,7 @@ const globalStyle = css`
   body {
     padding: 0;
     margin: 0;
-    font-family: 'Ubuntu', Ubuntu, Roboto, 'Open Sans', sans-serif;
+    ${fontFamily};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

@@ -9,7 +9,7 @@ export type EditPostProps = {
 };
 
 function EditPost({ path }: EditPostProps) {
-  usePostLoad(path);
+  usePostLoad();
 
   return (
     <div css={editorWrapper}>

@@ -28,12 +28,12 @@ function ReadPost(props: ReadPostProps) {
       {postContent.path && (
         <FloatLink
           name="fix"
-          to={`/edit/${encodeParamSlash(postContent.path)}`}
+          to={`/write/${encodeParamSlash(postContent.path)}`}
           position="top"
           color={palette.indigo[500]}
         />
       )}
-      <FloatLink name="write" to={'/new-post'} position="bottom" />
+      <FloatLink name="write" to={'/write'} position="bottom" />
     </>
   );
 }

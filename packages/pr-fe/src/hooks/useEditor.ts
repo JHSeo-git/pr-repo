@@ -3,6 +3,7 @@ import { makeContentWithFrontmatter } from '@src/lib/utils/markdownUtil';
 import {
   useResetEditorContent,
   useEditorContentValue,
+  useEditorUpdateModeInfoValue,
 } from '@src/states/editorStates';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
@@ -13,8 +14,9 @@ export default function useEditor() {
   const history = useHistory();
   const content = useEditorContentValue();
   const { reset } = useResetEditorContent();
-  const { save, loading, error } = useSavePost();
+  const { save, loading, error, update } = useSavePost();
   const { notify, clearAllToast } = useAppToast();
+  const updateModeInfo = useEditorUpdateModeInfoValue();
 
   useEffect(() => {
     if (!error) return;
@@ -28,7 +30,8 @@ export default function useEditor() {
   //   };
   // }, [clearAllToast]);
 
-  const onSave = () => {
+  const onSaveOrUpdate = () => {
+    console.log(content);
     if (!content?.title) {
       notify('Content Title is required', 'error');
       return;
@@ -51,7 +54,20 @@ export default function useEditor() {
       user: 'JHSeo',
     });
 
-    save(postTitle, postBody, date);
+    if (updateModeInfo.updateMode) {
+      if (!updateModeInfo.updatePath) return;
+      update({
+        path: updateModeInfo.updatePath,
+        body: postBody,
+        saveDate: date,
+      });
+    } else {
+      save({
+        slug: postTitle,
+        body: postBody,
+        saveDate: date,
+      });
+    }
   };
 
   const onCancel = () => {
@@ -62,7 +78,8 @@ export default function useEditor() {
 
   return {
     loading,
-    onSave,
+    onSave: onSaveOrUpdate,
     onCancel,
+    updateModeInfo,
   };
 }

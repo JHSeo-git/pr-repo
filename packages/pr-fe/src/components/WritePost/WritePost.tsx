@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import usePostLoad from '@src/hooks/usePostLoad';
 import { useResetEditorContent } from '@src/states/editorStates';
 import { useEffect } from 'react';
 import Editor from '../Editor';
@@ -9,6 +10,8 @@ export type WritePostProps = {};
 
 function WritePost(props: WritePostProps) {
   const { reset } = useResetEditorContent();
+  usePostLoad();
+
   useEffect(() => {
     return () => {
       reset();

@@ -1,21 +1,21 @@
-import { useEditorSync, useResetEditorContent } from '@src/states/editorStates';
+import {
+  useEditorSync,
+  useUpdateTargetSlugState,
+} from '@src/states/editorStates';
 import { useEffect } from 'react';
 import useGetGithubPost from './useGetGithubPost';
 
-export default function usePostLoad(path?: string) {
+export default function usePostLoad() {
   const sync = useEditorSync();
-  const { post } = useGetGithubPost(path);
-  const { reset } = useResetEditorContent();
+  const [pathslug] = useUpdateTargetSlugState();
+  const { post } = useGetGithubPost(pathslug ? pathslug : undefined);
 
   useEffect(() => {
     if (!post) return;
     sync({
       title: post.title,
       markDown: post.body,
+      path: post.path,
     });
-
-    return () => {
-      reset();
-    };
-  }, [post, sync, reset]);
+  }, [post, sync]);
 }
