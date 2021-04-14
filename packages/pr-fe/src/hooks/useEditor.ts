@@ -4,6 +4,7 @@ import {
   useResetEditorContent,
   useEditorContentValue,
   useEditorUpdateModeInfoValue,
+  useEditorWriteDateTime,
 } from '@src/states/editorStates';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
@@ -17,6 +18,7 @@ export default function useEditor() {
   const { save, loading, error, update } = useSavePost();
   const { notify, clearAllToast } = useAppToast();
   const updateModeInfo = useEditorUpdateModeInfoValue();
+  const [editorWriteDate] = useEditorWriteDateTime();
 
   useEffect(() => {
     if (!error) return;
@@ -41,14 +43,15 @@ export default function useEditor() {
       return;
     }
 
-    const date = new Date(Date.now());
+    const date = editorWriteDate ? editorWriteDate : new Date(Date.now());
     // TODO: useMemo??
     // TODO: short_description, category
     const postTitle = generateUrlSlug(content.title);
     const postBody = makeContentWithFrontmatter({
       title: content.title,
       body: content.markDown,
-      short_description: 'short',
+      short_description: content.shortDescription ?? '',
+      thumbnail: content.thumbnail ?? '',
       date,
       category: [],
       user: 'JHSeo',

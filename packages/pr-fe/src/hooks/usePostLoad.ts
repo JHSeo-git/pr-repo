@@ -15,6 +15,8 @@ export default function usePostLoad() {
     sync({
       title: post.title,
       markDown: post.body,
+      thumbnail: post.thumbnail ?? null,
+      shortDescription: post.short_description,
       path: post.path,
     });
   }, [post, sync]);

@@ -5,6 +5,7 @@ type GithubAPIType = {
   repo?: string;
   master?: string;
   postPath?: string;
+  githubUrlImagePrefix?: string;
 };
 export const githubAPIState = atom<GithubAPIType>({
   key: 'githubAPIState',
@@ -13,6 +14,7 @@ export const githubAPIState = atom<GithubAPIType>({
     repo: undefined,
     master: undefined,
     postPath: undefined,
+    githubUrlImagePrefix: undefined,
   },
 });
 

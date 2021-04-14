@@ -7,6 +7,7 @@ const recoilInitialize = ({ set }: MutableSnapshot) => {
     REACT_APP_GITHUB_OWNER,
     REACT_APP_GITHUB_MASTER,
     REACT_APP_GITHUB_POST_PATH,
+    REACT_APP_GITHUB_IMAGE_PREFIX,
   } = process.env;
 
   set(githubAPIState, {
@@ -14,6 +15,7 @@ const recoilInitialize = ({ set }: MutableSnapshot) => {
     repo: REACT_APP_GITHUB_REPO,
     master: REACT_APP_GITHUB_MASTER,
     postPath: REACT_APP_GITHUB_POST_PATH,
+    githubUrlImagePrefix: REACT_APP_GITHUB_IMAGE_PREFIX,
   });
 };
 

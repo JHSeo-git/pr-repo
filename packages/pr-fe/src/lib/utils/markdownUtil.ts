@@ -6,6 +6,7 @@ import { dateFullFormat } from './dateUtil';
 export const makeContentWithFrontmatter = ({
   title,
   short_description,
+  thumbnail,
   body,
   date,
   user,
@@ -14,6 +15,7 @@ export const makeContentWithFrontmatter = ({
   return matter.stringify(body, {
     title,
     short_description,
+    thumbnail,
     date: dateFullFormat(date),
     user: user ?? '',
     category: category?.join(','),
@@ -26,6 +28,7 @@ export const parseFrontmatterOfContent = (markdown: string) => {
   const frontmatter: FrontMatterType = {
     title: data['title'],
     short_description: data['short_description'] ?? null,
+    thumbnail: data['thumbnail'] ?? null,
     date: new Date(data['date']) ?? null,
     user: data['user'],
     category: data['category'] ? data['category'].split(',') : null,

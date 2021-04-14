@@ -31,6 +31,7 @@ export default function useGetGithubPost(path?: string) {
       title: parsed.frontmatter.title,
       date: parsed.frontmatter.date,
       short_description: parsed.frontmatter.short_description,
+      thumbnail: parsed.frontmatter.thumbnail,
       category: parsed.frontmatter.category,
       user: parsed.frontmatter.user,
       body: parsed.content,

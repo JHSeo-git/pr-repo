@@ -1,6 +1,9 @@
 import { css } from '@emotion/react';
 import usePostLoad from '@src/hooks/usePostLoad';
-import { useResetEditorContent } from '@src/states/editorStates';
+import {
+  useEditorWriteDateTime,
+  useResetEditorContent,
+} from '@src/states/editorStates';
 import { useEffect } from 'react';
 import Editor from '../Editor';
 import WritePostFooter from '../WritePostFooter';
@@ -10,7 +13,12 @@ export type WritePostProps = {};
 
 function WritePost(props: WritePostProps) {
   const { reset } = useResetEditorContent();
+  const [editorWriteDate, setEditorWriteDate] = useEditorWriteDateTime();
   usePostLoad();
+
+  useEffect(() => {
+    setEditorWriteDate(new Date(Date.now()));
+  }, [setEditorWriteDate]);
 
   useEffect(() => {
     return () => {
@@ -18,10 +26,13 @@ function WritePost(props: WritePostProps) {
     };
   }, [reset]);
 
+  // TODO: full screen loader
+  if (!editorWriteDate) return <div>not ready...</div>;
+
   return (
     <div css={editorWrapper}>
       <WritePostTitleInput />
-      <Editor />
+      <Editor writeDate={editorWriteDate} />
       <WritePostFooter />
     </div>
   );

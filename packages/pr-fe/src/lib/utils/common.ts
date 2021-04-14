@@ -26,3 +26,22 @@ export const getScrollTop = () => {
     : document.body.scrollTop;
   return scrollTop;
 };
+
+export const toBase64 = (file: File) =>
+  new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onloadend = () => {
+      if (!reader.result) {
+        reject('Parse Error');
+        return;
+      }
+      if (typeof reader.result !== 'string') {
+        reject('Parse type is not string');
+        return;
+      }
+      resolve(reader.result.split(',')[1]);
+    };
+    reader.onerror = (error) => reject(error);
+  });

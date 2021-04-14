@@ -2,6 +2,7 @@ export type FrontMatterType = {
   title: string;
   short_description: string;
   date: Date;
+  thumbnail?: string;
   user?: string;
   category?: string[];
 };

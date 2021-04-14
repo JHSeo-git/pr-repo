@@ -7,3 +7,4 @@ export { default as updateBranch } from './updateBranch';
 export { default as mergeToMaster } from './mergeToMaster';
 export { default as removeBranch } from './removeBranch';
 export { default as createIssue } from './createIssue';
+export { default as createOrUpdateContent } from './createOrUpdateContent';
